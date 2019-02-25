@@ -1,19 +1,12 @@
+package towerDefense.entities;
+import java.lang.*;
 
 /**
- * @author jodi
+ * @author Jodi
  *
  */
-public abstract class Enemy {
 
-	protected int hp;
-	protected int damage;
-	protected int attackSpeed;
-	protected int rangeX; 
-	protected int rangeY;
-	protected Tower targetTower;
-	protected int enemyPositionR;
-	protected int enemyPositionC;
-	protected boolean isDead;
+public abstract class Enemy extends Entity {
 	
 	////Enemy Constructor////
 	/** 
@@ -26,90 +19,20 @@ public abstract class Enemy {
 	 * @param column
 	 */
 	public Enemy(int hp, int damage, int speed, int rangeX, int rangeY, int row, int column) {
-		this.hp = hp;
-		this.damage = damage;
-		this.attackSpeed = speed;
-		this.rangeX = rangeX;
-		this.rangeY = rangeY;
-		this.enemyPositionR = row;
-		this.enemyPositionC = column;
-		this.isDead = false;
+		super(hp, damage, speed, rangeX, rangeY, row, column);
 	}
 
-	/** @return HP */
-	public int getHp() {
-		return hp;
-	}
-
-	/** @return damage */
-	public int getDamage() {
-		return damage;
-	}
- 
-	/** @return Speed */
-	public int getAttackSpeed() {
-		return attackSpeed;
-	}
-     
-	/** @return rangeX*/
-	public int getRangeX() {
-		return rangeX;
-	}
-
-	/** @return rangeY */
-	public int getRangeY() {
-		return rangeY;
-	}
-
-	/** @return Tower TargetTower */
-	public Tower getTargetTower() {
-		return targetTower;
-	}
-
-	/** @return enemyPositionR*/
-	public int getEnemyPositionR() {
-		return enemyPositionR;
-	}
-
-	/** @return enemyPositionC */
-	public int getEnemyPositionC() {
-		return enemyPositionC;
-	}
-	
-	/** @return boolean isDead()*/
-	public boolean getIsDead() {
-		return this.isDead;
-	}
-	 
-	/** @param targetTower
-	 */
-	///set TargetTower ////
-	public void setTargetTower(Tower targetTower) {
-		this.targetTower = targetTower;
-	}
-
-	/// set Enemy Position Row
-	public void setEnemyPositionR(int row) {
-		this.enemyPositionR = row;
-	}
-
-	//// Set Enemy Position Column
-	public void setEnemyPositionC(int column) {
-		this.enemyPositionC = column;
-	}
-	
-	/// Receive damage from opponent///
-	public void receiveDamage(int amount) {
-		this.hp -= amount; 
-		if (this.hp <= 0) {
-			this.isDead = true;
+	@Override public void updatePossibleTargets(float f) {
+		for(int i = 1; i < possibleTargets.size(); i++) {
+			int x = this.positionC - possibleTargets.get(i).getPositionC();
+			int y = this.positionR - possibleTargets.get(i).getPositionR();
+			double a = Math.sqrt((x*x) + (y*y));
 		}
 	}
 	
-	/** How the enemy attacks*/
-	////Override this method 
-	abstract public void Attack();
-	
+	@Override public void updateTarget(float f) {
+		
+	}
 	/** How the enemy moves according to position and speed **/
 	////Override this method
 	abstract public void Travel();

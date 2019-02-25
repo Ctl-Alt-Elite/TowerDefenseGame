@@ -107,4 +107,13 @@ public abstract class Entity {
 	}
 	
 	abstract public void attack();
+	
+	abstract public void updatePossibleTargets(float f);
+	
+	abstract public void updateTarget(float f);
+	
+	public void update(float f) {
+		this.updatePossibleTargets(f);
+		this.updateTarget(f);
+	}
 }
