@@ -10,16 +10,16 @@ public class Sniper extends Enemy {
 	public Sniper(int positionX, int positionY) {
 		super(HP,DAMAGEPERHIT,ATTACKSPEED,RANGEX,RANGEY,positionX,positionY);
 	}
-	
-	@Override
-	public void Attack() {
-		super.getTargetTower().receiveDamage(Sniper.DAMAGEPERHIT);
-		
-	}
 
 	@Override
 	public void Travel() {
 		//TODO will know more when map is more definite. 
+		
+	}
+
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -13,6 +13,7 @@ public abstract class Entity {
 	protected Entity target;
 	protected List <Entity> possibleTargets;
 	protected boolean isDead;
+
 	
 	public Entity( int hp, int damage, int attackSpeed, int rangeX, int rangeY, int positionR, int positionC) {
 		this.hp = hp;
@@ -24,7 +25,7 @@ public abstract class Entity {
 		this.positionC = positionC;
 				
 	}
-
+    //////Getters and setters/////
 	public int getHp() {
 		return hp;
 	}
@@ -85,7 +86,7 @@ public abstract class Entity {
 		return target;
 	}
 	
-	public List getPossibleTargets() {
+	public List<Entity> getPossibleTargets() {
 		return possibleTargets;
 	}
 	
@@ -93,25 +94,28 @@ public abstract class Entity {
 		return isDead;
 	}
 	
-	public void toggleIsDead() {
-		if(isDead == true) {
-			isDead = false;
-		}
-		if(isDead == false) {
-			isDead = true;
+	/** checks if the entity is dead and set isdead to true (allows entity to die) **/
+	public void die() {
+		if (this.hp > 1) {
+			this.isDead = true;
 		}
 	}
 	
+	/** Allows the enemy to receive damage from the attack @see Attack */
 	public void receiveDamage(Attack attack) {
-		this.damage -= attack.getDamage();
+		this.hp -= attack.getDamage();
 	}
 	
+	/** allows entity to attack others **/
 	abstract public void attack();
 	
+	/** update the possibleTargets list by distance to this entity - insertion sort - **/
 	abstract public void updatePossibleTargets(float f);
 	
+	/** updates the target to the next target after current target dies **/
 	abstract public void updateTarget(float f);
 	
+	/** calls for updates of targets list and target **/
 	public void update(float f) {
 		this.updatePossibleTargets(f);
 		this.updateTarget(f);

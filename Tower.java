@@ -1,4 +1,4 @@
-
+package towerDefense.entities;
 public abstract class Tower {
 
 	private int hp;

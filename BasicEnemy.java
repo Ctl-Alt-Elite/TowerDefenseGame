@@ -1,3 +1,4 @@
+package towerDefense.entities;
 public class BasicEnemy extends Enemy {
 	
 	private final static int HP = 100;
@@ -11,15 +12,16 @@ public class BasicEnemy extends Enemy {
 		super(HP,DAMAGEPERHIT,ATTACKSPEED,RANGEX,RANGEY,positionX,positionY);
 	}
 
-	@Override
-	public void Attack() {
-		super.getTargetTower().receiveDamage(this.DAMAGEPERHIT);
-		
-	}
 
 	@Override
 	public void Travel() {
 		//TODO will know more when map is more definite. 
+		
+	}
+
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
 		
 	}
 }
