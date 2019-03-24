@@ -1,4 +1,4 @@
-package towerDefense.entities;
+package Entities;
 import java.lang.*;
 
 /**

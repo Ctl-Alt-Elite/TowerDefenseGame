@@ -1,4 +1,4 @@
-package towerDefense.entities;
+package Entities;
 
 public class Sniper extends Enemy {
 	public static final int HP = 75;

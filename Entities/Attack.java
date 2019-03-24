@@ -1,4 +1,4 @@
-package towerDefense.entities;
+package Entities;
 
 public class Attack {
 	public static final int MELEE = 0;

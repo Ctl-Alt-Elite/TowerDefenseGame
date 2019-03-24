@@ -1,4 +1,5 @@
-package towerDefense.entities;
+package Entities;
+
 public class BasicEnemy extends Enemy {
 	
 	private final static int HP = 100;

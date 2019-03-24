@@ -1,4 +1,4 @@
-package towerDefense.entities;
+package Entities;
 
 import java.util.List;
 
@@ -101,7 +101,31 @@ public abstract class Entity {
 		}
 	}
 	
-	/** Allows the enemy to receive damage from the attack @see Attack */
+	/** Calculate the distance between two Entities **/
+	public double calculateDistance(Entity e) {
+		int x = this.positionC - e.getPositionC();
+		int y = this.positionR - e.getPositionR();
+		double result = Math.sqrt((x*x) + (y*y));
+		return result;
+	}
+	
+	/** Adds to the to the possibleTargets list **/
+	public void addPossibleTarget(Entity e) {
+		if (this.possibleTargets == null) {
+			this.possibleTargets.add(e);
+		}
+		else{
+			for (int i = 0; i< this.possibleTargets.size(); i++) {
+				if (this.calculateDistance(this.possibleTargets.get(i))  > this.calculateDistance(e)){
+					this.possibleTargets.add(i, e);
+					break;
+				}
+			}
+		}
+		this.possibleTargets.add(e);
+	}
+	
+	/** Allows the entity to receive damage from the attack @see Attack */
 	public void receiveDamage(Attack attack) {
 		this.hp -= attack.getDamage();
 	}
@@ -110,10 +134,25 @@ public abstract class Entity {
 	abstract public void attack();
 	
 	/** update the possibleTargets list by distance to this entity - insertion sort - **/
-	abstract public void updatePossibleTargets(float f);
+	public void updatePossibleTargets(float f) {
+		for (int i = 1; i < this.possibleTargets.size(); i++) {
+			Entity first = this.possibleTargets.get(i);
+			int j = i-1;
+			
+			while(j>=0 && this.calculateDistance(first) < this.calculateDistance(this.possibleTargets.get(j))) {
+				j--; 
+			}
+			this.possibleTargets.add(j,first);
+		}
+	}
 	
 	/** updates the target to the next target after current target dies **/
-	abstract public void updateTarget(float f);
+	public void updateTarget(float f) {
+		if(this.target.isDead == true) {
+			this.target = possibleTargets.get(0);
+		}
+		
+	}
 	
 	/** calls for updates of targets list and target **/
 	public void update(float f) {
